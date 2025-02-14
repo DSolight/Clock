@@ -1,8 +1,8 @@
 [
-  {"city": "New York", "timezone": "-5"},
-  {"city": "London", "timezone": "0"},
-  {"city": "Tokyo", "timezone": "+9"},
-  {"city": "Sydney", "timezone": "+10"},
-  {"city": "Moscow", "timezone": "+3"},
-  {"city": "Krasnoyarsk", "timezone": "+7"}
+  {"city": "Москва", "timezone": "Europe/Moscow"},
+  {"city": "Екатеринбург", "timezone": "Asia/Yekaterinburg"},
+  {"city": "Новосибирск", "timezone": "Asia/Novosibirsk"},
+  {"city": "Красноярск", "timezone": "Asia/Krasnoyarsk"},
+  {"city": "Иркутск", "timezone": "Asia/Irkutsk"},
+  {"city": "Владивосток", "timezone": "Asia/Vladivostok"}
 ]

@@ -1,23 +1,22 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setClocks } from '../clockSlice';
+import { useSelector } from 'react-redux';
 
-const TimezoneSelector = ({ clockIndex }) => {
-  const dispatch = useDispatch();
-  const timezones = useSelector((state) => state.clocks.timezones);
+const TimezoneSelector = ({ clockIndex, onChange }) => {
   const clocks = useSelector((state) => state.clocks.clocks);
+  const timezones = useSelector((state) => state.clocks.timezones);
 
   const handleChange = (event) => {
     const selectedTimezone = event.target.value;
-    const newClocks = [...clocks];
-    newClocks[clockIndex] = selectedTimezone;
-    dispatch(setClocks(newClocks));
+    onChange(selectedTimezone);
   };
+
+  // Фильтруем доступные часовые пояса, исключая уже выбранные
+  const availableTimezones = timezones.filter(tz => !clocks.includes(tz.timezone) || clocks[clockIndex] === tz.timezone);
 
   return (
     <select onChange={handleChange} value={clocks[clockIndex] || ''}>
-      <option value="" disabled>Select a timezone</option>
-      {timezones.map((tz, index) => (
+      <option value="" disabled>Выберите город</option>
+      {availableTimezones.map((tz, index) => (
         <option key={index} value={tz.timezone}>
           {tz.city}
         </option>
