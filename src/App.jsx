@@ -15,14 +15,18 @@ const App = () => {
     dispatch(fetchTimezones());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log('Current number of clocks:', numberOfClocks);
+  }, [numberOfClocks]);
+
   const handleClockNumberChange = (event) => {
     const value = parseInt(event.target.value, 10);
     console.log('Selected number of clocks:', value);
     dispatch(setNumberOfClocks(value));
   };
 
-  const handleTimezoneChange = (index, timezone) => {
-    dispatch(updateClockTimezone({ index, timezone }));
+  const handleTimezoneChange = (index, timezone, city) => {
+    dispatch(updateClockTimezone({ index, timezone, city }));
   };
 
   if (loading) {
@@ -42,18 +46,15 @@ const App = () => {
         </select>
       </label>
       <div>
-        {Array.from({ length: numberOfClocks }).map((_, index) => {
-          const selectedTimezone = timezones.find(tz => tz.timezone === clocks[index]);
-          return (
-            <div key={index}>
-              <Clock timezone={clocks[index]} city={selectedTimezone ? selectedTimezone.city : 'Local'} />
-              <TimezoneSelector
-                clockIndex={index}
-                onChange={(timezone) => handleTimezoneChange(index, timezone)}
-              />
-            </div>
-          );
-        })}
+        {clocks.map((clock, index) => (
+          <div key={index}>
+            <Clock timezone={clock.timezone} city={clock.city} />
+            <TimezoneSelector
+              clockIndex={index}
+              onChange={(timezone, city) => handleTimezoneChange(index, timezone, city)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

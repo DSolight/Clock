@@ -6,15 +6,17 @@ const TimezoneSelector = ({ clockIndex, onChange }) => {
   const timezones = useSelector((state) => state.clocks.timezones);
 
   const handleChange = (event) => {
-    const selectedTimezone = event.target.value;
-    onChange(selectedTimezone);
+    const selectedTimezone = timezones.find(tz => tz.timezone === event.target.value);
+    if (selectedTimezone) {
+      onChange(selectedTimezone.timezone, selectedTimezone.city);
+    }
   };
 
   // Фильтруем доступные часовые пояса, исключая уже выбранные
-  const availableTimezones = timezones.filter(tz => !clocks.includes(tz.timezone) || clocks[clockIndex] === tz.timezone);
+  const availableTimezones = timezones.filter(tz => !clocks.some(clock => clock.timezone === tz.timezone) || clocks[clockIndex].timezone === tz.timezone);
 
   return (
-    <select onChange={handleChange} value={clocks[clockIndex] || ''}>
+    <select onChange={handleChange} value={clocks[clockIndex]?.timezone || ''}>
       <option value="" disabled>Выберите город</option>
       {availableTimezones.map((tz, index) => (
         <option key={index} value={tz.timezone}>
