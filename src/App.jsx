@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTimezones } from './clockSlice';
-import Clock from './components/clock';
+import Clock from './components/Clock';
 import TimezoneSelector from './components/TimezoneSelector';
 
 const App = () => {

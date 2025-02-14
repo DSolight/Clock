@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchTimezones = createAsyncThunk('clocks/fetchTimezones', async () => {
-  const response = await fetch('/src/timezones.json');
+  const response = await fetch('/timezones.json');
   return response.json();
 });
 
