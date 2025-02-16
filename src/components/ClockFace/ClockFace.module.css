@@ -1,0 +1,15 @@
+.clock-face {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.clock-face svg {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.clock-face svg:hover {
+  transform: scale(1.1);
+}

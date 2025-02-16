@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import ClockFace from '../ClockFace/ClockFace';
+import './Clocks.module.css';
 
 const Clock = ({ timezone, city }) => {
   const [time, setTime] = useState(new Date());
@@ -15,8 +17,10 @@ const Clock = ({ timezone, city }) => {
   const localTime = timezone ? new Date(time.toLocaleString('en-US', { timeZone: timezone })) : time;
 
   return (
-    <div>
-      <h2>{localTime.toLocaleTimeString('ru-RU', { hour12: false })}</h2>
+    <div className="clock">
+      <h2>{city}</h2>
+      <ClockFace timezone={timezone} />
+      <p>{localTime.toLocaleTimeString('ru-RU', { hour12: false })}</p>
     </div>
   );
 };

@@ -1,0 +1,15 @@
+.clock-selector {
+  margin: 0;
+}
+
+.clock-selector label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.clock-selector select {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -1,7 +1,7 @@
 {
-  "name": "your-project-name",
+  "name": "TorgBox",
   "version": "1.0.0",
-  "description": "A React project with Webpack",
+  "description": "Тестовое задание для TorgBox",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open",

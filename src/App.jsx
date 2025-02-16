@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTimezones, setNumberOfClocks, updateClockTimezone } from './clockSlice';
-import Clock from './components/Clock';
-import TimezoneSelector from './components/TimezoneSelector';
+import Clock from './components/Clocks/Clocks';
+import TimezoneSelector from './components/TimezoneSelector/TimezoneSelector';
+import ClockSelector from './components/ClockSelector/ClockSelector';
+import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,13 +17,7 @@ const App = () => {
     dispatch(fetchTimezones());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('Current number of clocks:', numberOfClocks);
-  }, [numberOfClocks]);
-
-  const handleClockNumberChange = (event) => {
-    const value = parseInt(event.target.value, 10);
-    console.log('Selected number of clocks:', value);
+  const handleClockNumberChange = (value) => {
     dispatch(setNumberOfClocks(value));
   };
 
@@ -30,22 +26,17 @@ const App = () => {
   };
 
   if (loading) {
-    return <div>Loading timezones...</div>;
+    return <div>Загрузка часов...</div>;
   }
 
   return (
-    <div>
-      <label>
-        Number of Clocks:
-        <select value={numberOfClocks} onChange={handleClockNumberChange}>
-          {[...Array(timezones.length).keys()].map((_, index) => (
-            <option key={index} value={index + 1}>
-              {index + 1}
-            </option>
-          ))}
-        </select>
-      </label>
-      <div>
+    <div className='project'>
+      <ClockSelector
+        numberOfClocks={numberOfClocks}
+        timezones={timezones}
+        onChange={handleClockNumberChange}
+      />
+      <div className='clocks'>
         {clocks.map((clock, index) => (
           <div key={index}>
             <Clock timezone={clock.timezone} city={clock.city} />

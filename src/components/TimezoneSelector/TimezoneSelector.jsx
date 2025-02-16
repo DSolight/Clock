@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styles from './TimezoneSelector.module.css';
 
 const TimezoneSelector = ({ clockIndex, onChange }) => {
   const clocks = useSelector((state) => state.clocks.clocks);
@@ -16,14 +17,16 @@ const TimezoneSelector = ({ clockIndex, onChange }) => {
   const availableTimezones = timezones.filter(tz => !clocks.some(clock => clock.timezone === tz.timezone) || clocks[clockIndex].timezone === tz.timezone);
 
   return (
-    <select onChange={handleChange} value={clocks[clockIndex]?.timezone || ''}>
-      <option value="" disabled>Выберите город</option>
-      {availableTimezones.map((tz, index) => (
-        <option key={index} value={tz.timezone}>
-          {tz.city}
-        </option>
-      ))}
-    </select>
+    <div className='timezone-selector'>
+      <select onChange={handleChange} value={clocks[clockIndex]?.timezone || ''}>
+        <option value="" disabled>Выберите город</option>
+        {availableTimezones.map((tz, index) => (
+          <option key={index} value={tz.timezone}>
+            {tz.city}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

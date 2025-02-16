@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './App';
-import './index.css';
+import './App.css';
 
 const root = document.getElementById('root');
 

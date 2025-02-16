@@ -1,0 +1,12 @@
+[
+  {"city": "Москва", "timezone": "Europe/Moscow"},
+  {"city": "Екатеринбург", "timezone": "Asia/Yekaterinburg"},
+  {"city": "Новосибирск", "timezone": "Asia/Novosibirsk"},
+  {"city": "Красноярск", "timezone": "Asia/Krasnoyarsk"},
+  {"city": "Иркутск", "timezone": "Asia/Irkutsk"},
+  {"city": "Владивосток", "timezone": "Asia/Vladivostok"},
+  {"city": "Лондон", "timezone": "Europe/London"},
+  {"city": "Нью-Йорк", "timezone": "America/New_York"},
+  {"city": "Токио", "timezone": "Asia/Tokyo"},
+  {"city": "Сидней", "timezone": "Australia/Sydney"}
+]
