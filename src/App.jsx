@@ -20,7 +20,6 @@ export default function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('Setting up time update interval');
     const interval = setInterval(() => {
       dispatch(updateTime());
     }, 1000);

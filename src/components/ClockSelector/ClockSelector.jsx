@@ -6,7 +6,6 @@ export default function ClockSelector({ numberOfClocks, timezones, onChange }) {
     const value = parseInt(event.target.value, 10);
     onChange(value);
   };
-  console.log('Rendering ClockSelector');
   return (
     <div className="clock-selector">
       <label>
