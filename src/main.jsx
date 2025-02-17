@@ -1,13 +1,14 @@
-import ReactDOM from 'react-dom/client';
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store';
 import App from './App';
-import './App.css';
+import store from './utils/store';
 
-const root = document.getElementById('root');
+// Используем createRoot для рендеринга приложения
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
 
-ReactDOM.createRoot(root).render(
+root.render(
   <Provider store={store}>
     <App />
   </Provider>

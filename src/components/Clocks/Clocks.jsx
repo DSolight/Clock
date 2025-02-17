@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ClockFace from '../ClockFace/ClockFace';
-import './Clocks.module.css';
+import './Clocks.css';
 
-const Clock = ({ timezone, city }) => {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+export default function Clock({ timezone, city, time }) {
+  // Преобразуем метку времени обратно в объект Date
+  const currentTime = new Date(time);
 
   // Применение часового пояса
-  const localTime = timezone ? new Date(time.toLocaleString('en-US', { timeZone: timezone })) : time;
+  const localTime = timezone ? new Date(currentTime.toLocaleString('en-US', { timeZone: timezone })) : currentTime;
 
   return (
     <div className="clock">
-      <h2>{city}</h2>
-      <ClockFace timezone={timezone} />
+      <ClockFace timezone={timezone} time={localTime} /> {/* Передаём время в ClockFace */}
       <p>{localTime.toLocaleTimeString('ru-RU', { hour12: false })}</p>
     </div>
   );
-};
-
-export default Clock;
+}

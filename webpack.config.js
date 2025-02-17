@@ -1,6 +1,6 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: '/',
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -40,12 +40,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html', // Путь к вашему HTML-файлу
+      template: "./public/index.html", // Путь к вашему HTML-файлу
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: '*.json', to: '.', context: path.resolve(__dirname, "public") }
-      ]
+      patterns: [{ from: "*.json", to: ".", context: path.resolve(__dirname, "public") }],
     }),
   ],
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styles from './TimezoneSelector.module.css';
+import './TimezoneSelector.css';
 
-const TimezoneSelector = ({ clockIndex, onChange }) => {
+export default function TimezoneSelector({ clockIndex, onChange }) {
   const clocks = useSelector((state) => state.clocks.clocks);
   const timezones = useSelector((state) => state.clocks.timezones);
 
@@ -15,7 +15,7 @@ const TimezoneSelector = ({ clockIndex, onChange }) => {
 
   // Фильтруем доступные часовые пояса, исключая уже выбранные
   const availableTimezones = timezones.filter(tz => !clocks.some(clock => clock.timezone === tz.timezone) || clocks[clockIndex].timezone === tz.timezone);
-
+  console.log('Rendering TimezoneSelector');
   return (
     <div className='timezone-selector'>
       <select onChange={handleChange} value={clocks[clockIndex]?.timezone || ''}>
@@ -28,6 +28,4 @@ const TimezoneSelector = ({ clockIndex, onChange }) => {
       </select>
     </div>
   );
-};
-
-export default TimezoneSelector;
+}

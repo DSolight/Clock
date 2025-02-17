@@ -1,20 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTimezones, setNumberOfClocks, updateClockTimezone } from './clockSlice';
+import { fetchTimezones, setNumberOfClocks, updateClockTimezone } from './utils/clockSlice';
+import { updateTime } from './utils/timeSlice';
 import Clock from './components/Clocks/Clocks';
 import TimezoneSelector from './components/TimezoneSelector/TimezoneSelector';
 import ClockSelector from './components/ClockSelector/ClockSelector';
 import './App.css';
 
-const App = () => {
+export default function App() {
   const dispatch = useDispatch();
   const clocks = useSelector((state) => state.clocks.clocks);
   const timezones = useSelector((state) => state.clocks.timezones);
   const loading = useSelector((state) => state.clocks.loading);
   const numberOfClocks = useSelector((state) => state.clocks.numberOfClocks);
+  const currentTime = useSelector((state) => state.time.currentTime);
 
   useEffect(() => {
     dispatch(fetchTimezones());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log('Setting up time update interval');
+    const interval = setInterval(() => {
+      dispatch(updateTime());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [dispatch]);
 
   const handleClockNumberChange = (value) => {
@@ -38,8 +49,8 @@ const App = () => {
       />
       <div className='clocks'>
         {clocks.map((clock, index) => (
-          <div key={index}>
-            <Clock timezone={clock.timezone} city={clock.city} />
+          <div key={index} className='main-clock'>
+            <Clock timezone={clock.timezone} city={clock.city} time={currentTime} />
             <TimezoneSelector
               clockIndex={index}
               onChange={(timezone, city) => handleTimezoneChange(index, timezone, city)}
@@ -49,6 +60,4 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-export default App;
+}

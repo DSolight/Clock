@@ -16,22 +16,26 @@ const clockSlice = createSlice({
   reducers: {
     setNumberOfClocks: (state, action) => {
       const newNumberOfClocks = action.payload;
-
+      console.log('Setting number of clocks:', action.payload);
       // Обновляем количество часов
       state.numberOfClocks = newNumberOfClocks;
 
       // Добавляем новые часы, сохраняя старые
       if (newNumberOfClocks > state.clocks.length) {
-        const additionalClocks = state.timezones.slice(state.clocks.length, newNumberOfClocks).map(tz => ({
-          timezone: tz.timezone,
-          city: tz.city,
-        }));
+        const additionalClocks = state.timezones
+          .filter(tz => !state.clocks.some(clock => clock.timezone === tz.timezone))
+          .slice(0, newNumberOfClocks - state.clocks.length)
+          .map(tz => ({
+            timezone: tz.timezone,
+            city: tz.city,
+          }));
         state.clocks = [...state.clocks, ...additionalClocks];
       } else {
         state.clocks = state.clocks.slice(0, newNumberOfClocks);
       }
     },
     updateClockTimezone: (state, action) => {
+      console.log('Updating timezone for clock at index:', action.payload);
       const { index, timezone, city } = action.payload;
       if (index >= 0 && index < state.clocks.length) {
         state.clocks[index] = { timezone, city };

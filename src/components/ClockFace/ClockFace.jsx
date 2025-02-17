@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import './ClockFace.module.css';
+import React from 'react';
+import './ClockFace.css';
 
-const ClockFace = ({ timezone }) => {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Применение часового пояса
-  const localTime = timezone ? new Date(time.toLocaleString('en-US', { timeZone: timezone })) : time;
-
-  const seconds = localTime.getSeconds();
-  const minutes = localTime.getMinutes();
-  const hours = localTime.getHours() % 12;
+export default function ClockFace({ timezone, time }) {
+  // Используем переданное время
+  const seconds = time.getSeconds();
+  const minutes = time.getMinutes();
+  const hours = time.getHours() % 12;
 
   // Корректируем начальный угол на 90 градусов влево
   const secondsAngle = (seconds / 60) * 360;
@@ -77,6 +65,4 @@ const ClockFace = ({ timezone }) => {
       </svg>
     </div>
   );
-};
-
-export default ClockFace;
+}

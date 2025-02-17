@@ -1,12 +1,12 @@
 import React from 'react';
-import './ClockSelector.module.css';
+import './ClockSelector.css';
 
-const ClockSelector = ({ numberOfClocks, timezones, onChange }) => {
+export default function ClockSelector({ numberOfClocks, timezones, onChange }) {
   const handleChange = (event) => {
     const value = parseInt(event.target.value, 10);
     onChange(value);
   };
-
+  console.log('Rendering ClockSelector');
   return (
     <div className="clock-selector">
       <label>
@@ -21,6 +21,4 @@ const ClockSelector = ({ numberOfClocks, timezones, onChange }) => {
       </label>
     </div>
   );
-};
-
-export default ClockSelector;
+}
